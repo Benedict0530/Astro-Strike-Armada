@@ -1,0 +1,266 @@
+body, html {
+  margin: 0;
+  padding: 0;
+     touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+      overflow: hidden;
+        user-select: none;
+}
+
+.game-container {
+  width: 100vw;
+  height: 100vh;
+  background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/outer_space.jpeg') repeat-y;
+  background-size: auto 20000%; /* Adjust size for seamless tiling */
+  background-position: center top; /* Start from the top center */
+  position: relative;
+  animation: scrollBackground 20s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes scrollBackground {
+  from {
+    background-position: center top;
+  }
+  to {
+    background-position: center bottom;
+  }
+}
+
+
+
+
+#player {
+  position: absolute;
+  width: 111px; /* Individual frame width */
+  height: 80px; /* Individual frame height */
+  animation: playerIdle 0.5s steps(2) infinite;
+  z-index: 1;
+}
+
+@keyframes playerIdle {
+  from { background-position: 0; }
+  to { background-position: -222px; } /* Total sprite width */
+}
+
+#joystick {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#joystick .stick {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 50%;
+}
+
+.flipped {
+  transform: scaleX(-1);
+}
+
+
+
+.bullet {
+  position: absolute;
+  width: 10px;
+  height: 50px;
+  background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/Bullet_.png') no-repeat center center;
+  background-size: cover;
+
+}
+.enemy {
+  width: 100px;
+  height: 100px;
+    background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/cropship2.png') no-repeat center center;
+    background-size: contain;
+  position: absolute;
+}
+
+
+
+
+.enemy-bullet {
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/shot6_1.png') no-repeat center center;
+  background-size: contain;
+
+}
+
+/* Add explosion effect styles */
+.explosion {
+  width: 64px; /* Adjust size as needed */
+  height: 64px; /* Adjust size as needed */
+  background-image: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/spritesheet%20(13).png'); /* Replace with your explosion image */
+  background-size: cover;
+  position: absolute;
+  animation: explodeAnimation 0.5s steps(6) forwards;
+  z-index: 101; /* Ensure the explosion is above other elements */
+}
+
+
+/* Define explosion animation */
+@keyframes explodeAnimation {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -384px 0; /* Adjust according to your sprite sheet */
+  }
+}
+
+.player-body-explosion {
+                         width: 64px; /* Adjust size as needed */
+                         height: 64px; /* Adjust size as needed */
+                         background-image: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/spritesheet%20(14).png'); /* Replace with your explosion image */
+                         background-size: cover;
+                         position: absolute;
+                         animation: explodeAnimation 0.5s steps(6) forwards;
+                         z-index: 100; /* Ensure the explosion is above other elements */
+                       }
+
+                      .boss {
+                          width: 150px; /* Adjust the width as needed */
+                          height: 150px; /* Adjust the height as needed */
+                          background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/boss.png') no-repeat center center;
+                              background-size: contain;
+                          position: absolute;
+                           z-index: 99;
+                          /* Add any additional styling properties for your boss */
+                      }
+                      /* Add styling for the ultimate boss */
+                      .ultimate-boss {
+                          width: 200px; /* Set the width of the ultimate boss */
+                          height: 200px; /* Set the height of the ultimate boss */
+                       background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/boss.png') no-repeat center center;
+                           background-size: contain;
+                          position: absolute;
+                          border-radius: 50%; /* Make the boss round */
+                          /* Add any additional styling based on your game's design */
+                          /* You can add background images, animations, etc. */
+                          z-index: 99;
+                      }
+
+                      /* Example: Add an animation for the ultimate boss */
+                      @keyframes bossAnimation {
+                          0% {
+                              transform: scale(1);
+                          }
+                          50% {
+                              transform: scale(1.2);
+                          }
+                          100% {
+                              transform: scale(1);
+                          }
+                      }
+
+                      .ultimate-boss {
+                          animation: bossAnimation 1s infinite; /* Apply the animation to the ultimate boss */
+                      }
+                      .hp-bar {
+                          width: 100%; /* Adjust the width as needed */
+                          height: 5px; /* Adjust the height as needed */
+                          background-color: #5B3D53; /* Set the initial color of the HP bar */
+
+                          /* Add any other styling properties you want */
+                      }
+                      .player-hp-bar {
+                        position: fixed;
+                        bottom: 0px;
+                        width: 100%;
+                        height: 5px;
+                        background-color: #59FFCF; /* Green color for HP bar */
+
+                      }
+
+                      /* CSS for Game Over Screen */
+                      #gameOverScreen {
+                          display: none;
+                          position: fixed;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                          text-align: center;
+                          background-color: rgba(255, 0, 0, 0.2); /* Red background */
+                          padding: 20px;
+                          border-radius: 10px;
+                          color: white;
+                          z-index: 999;
+                      }
+
+                      #gameOverScreen h1 {
+                          margin-bottom: 20px;
+                      }
+
+                      #gameOverScreen button {
+                          padding: 10px 20px;
+                          font-size: 16px;
+                          background-color: white;
+                          color: red;
+                          border: none;
+                          cursor: pointer;
+                          border-radius: 5px;
+                      }
+
+                      /* CSS for Win Screen */
+                      #winScreen {
+                          display: none;
+                          position: fixed;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                          text-align: center;
+                          background-color: rgba(0, 255, 0, 0.2); /* Green background */
+                          padding: 20px;
+                          border-radius: 10px;
+                          color: white;
+                          z-index: 999;
+                      }
+
+                      #winScreen h1 {
+                          margin-bottom: 20px;
+                      }
+
+                      #winScreen button {
+                          padding: 10px 20px;
+                          font-size: 16px;
+                          background-color: white;
+                          color: green;
+                          border: none;
+                          cursor: pointer;
+                          border-radius: 5px;
+                      }
+                      .screen {
+                        display: none;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        text-align: center;
+                        background-color: rgba(0, 0, 0, 0.8);
+                        color: white;
+                        padding: 20px;
+                        border-radius: 10px;
+                      }
+
+                      #gameOverScreen, #winScreen {
+                        z-index: 9999; /* Ensure the screens are on top of other elements */
+                      }
+
+
+
+
+
+
+
+
