@@ -59,7 +59,7 @@ body, html {
 #joystick .stick {
   width: 50px;
   height: 50px;
-  background: rgba(254, 254, 254, 0.8);
+  background: rgba(0, 0, 0, 0);
   border-radius: 50%;
 }
 
