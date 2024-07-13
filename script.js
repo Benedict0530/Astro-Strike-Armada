@@ -12,7 +12,6 @@ let ultimateBossHP = 100; // Set the initial HP value
 const playerMaxHP = 150; // Set the maximum HP for the player
 let playerHP = playerMaxHP;
 let leftRightEnemyRespawnInterval;
-let bulletSound = null;
 let enemyBulletSound = null;
 let playerHitSound = null;
 let winSound = null;
@@ -136,13 +135,6 @@ function createBullet() {
     const numBullets = 10; // Number of bullets to create
     const spaceBetweenBullets = 1; // Space between bullets in pixels
 
-    // Stop the previous sound instance if it exists
-    if (bulletSound) {
-        bulletSound.pause();
-        bulletSound.currentTime = 0; // Reset the sound to the beginning
-    }
-
-    bulletSound = new Audio('laser.mp3'); // Replace 'path/to/laser.mp3' with your actual file path
 
     for (let i = 0; i < numBullets; i++) {
         const bullet = document.createElement('div');
@@ -162,8 +154,6 @@ function createBullet() {
 
         animateBullet(bullet);
 
-        // Play the bullet sound
-        bulletSound.play();
     }
 }
 
