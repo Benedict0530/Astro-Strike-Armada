@@ -12,10 +12,6 @@ let ultimateBossHP = 100; // Set the initial HP value
 const playerMaxHP = 150; // Set the maximum HP for the player
 let playerHP = playerMaxHP;
 let leftRightEnemyRespawnInterval;
-let enemyBulletSound = null;
-let playerHitSound = null;
-let winSound = null;
-let overSound = null;
 
 
 
@@ -135,7 +131,6 @@ function createBullet() {
     const numBullets = 10; // Number of bullets to create
     const spaceBetweenBullets = 1; // Space between bullets in pixels
 
-
     for (let i = 0; i < numBullets; i++) {
         const bullet = document.createElement('div');
         bullet.classList.add('bullet');
@@ -153,7 +148,6 @@ function createBullet() {
         bullet.style.top = `${bulletY}px`;
 
         animateBullet(bullet);
-
     }
 }
 
@@ -317,15 +311,8 @@ function showGameOverScreen() {
 }
 
 function showWinScreen() {
-      // Stop the previous sound instance if it exists
-      if (winSound) {
-        winSound.pause();
-        winSound.currentTime = 0; // Reset the sound to the beginning
-    }
-    winSound = new Audio('win.wav'); 
   const winScreen = document.getElementById('winScreen');
   winScreen.style.display = 'block';
-  winSound.play();
 }
 
 function restartGame() {
@@ -538,19 +525,12 @@ function createEnemyBullet(enemy) {
     const bulletX = enemy.offsetLeft + enemy.offsetWidth / 2;
     const bulletY = enemy.offsetTop + enemy.offsetHeight;
 
-    if (enemyBulletSound) {
-        enemyBulletSound.pause();
-        enemyBulletSound.currentTime = 0; // Reset the sound to the beginning
-    }
-    enemyBulletSound = new Audio('enemybullet.wav');
-
     bullet.style.left = `${bulletX}px`;
     bullet.style.top = `${bulletY}px`;
 
     enemyBullets.push(bullet); // Add the bullet to the array
 
     animateEnemyBullet(bullet);
-    enemyBulletSound.play();
 }
 
 // Function to animate enemy bullets
@@ -627,11 +607,6 @@ function handlePlayerCollision() {
     // Create and append explosion element at the center of the player
     createExplosion1(playerCenterX, playerCenterY);
 
-    if (playerHitSound) {
-        playerHitSound.pause();
-        playerHitSound.currentTime = 0; // Reset the sound to the beginning
-    }
-    playerHitSound = new Audio('playerCollide.wav');
     // Implement any other logic you want for handling player collision
     // For example, decrease player's HP, update UI, or trigger game over
     if (!isHPDecreasing) {
@@ -642,7 +617,6 @@ function handlePlayerCollision() {
         }, 1000); // Add a delay to prevent rapid HP decrease
     }
 
-    playerHitSound.play();
     console.log('Player collided.');
 }
 
@@ -751,13 +725,7 @@ function decreasePlayerHP(amount) {
 
 // Function to handle player defeat (customize as needed)
 function handlePlayerDefeat() {
-    if(overSound){
-        overSound.pause();
-        overSound.currentTime = 0;
-    }
 
-    overSound = new Audio('path/to/laser.mp3'); 
-    overSound.play();
 showGameOverScreen();
  // Remove all enemies, including regular bosses and ultimate bosses
     document.querySelectorAll('.enemy, .boss, .ultimate-boss').forEach((enemy) => {
@@ -765,11 +733,11 @@ showGameOverScreen();
             document.body.removeChild(enemy);
         }
     });
-  
+
 
     clearInterval(leftRightEnemyRespawnInterval);
 
-  
+
 
     // Optionally, perform other actions or trigger the next phase of the game
 }
