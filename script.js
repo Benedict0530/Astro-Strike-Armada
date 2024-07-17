@@ -306,13 +306,11 @@ function decreaseUltimateBossHP() {
     updateUltimateBossHPBar();
 }
 function showGameOverScreen() {
-	sendAnalytics('loseTheGame', null);
   const gameOverScreen = document.getElementById('gameOverScreen');
   gameOverScreen.style.display = 'block';
 }
 
 function showWinScreen() {
-	sendAnalytics('winTheGame', null);
   const winScreen = document.getElementById('winScreen');
   winScreen.style.display = 'block';
 }
@@ -765,14 +763,7 @@ setInterval(() => {
         createLeftRightEnemy();
     }
 }, 1000); // respawn every 5 seconds as an example
-function sendAnalytics(eventName, eventData) {
-    if (eventName == null) {
-        return;
-    } else {
-        window.jsBridge.postMessage(eventName, JSON.stringify(eventData)); // Pass eventData as a JSON string
-        console.log('Event Tracked: ' + eventName);
-    }
-}
+
 
 updatePlayerHPBar();
 
