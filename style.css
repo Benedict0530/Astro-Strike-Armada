@@ -10,7 +10,7 @@ body, html {
 .game-container {
   width: 100vw;
   height: 100vh;
-  background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/background.jpeg') repeat-y;
+  background: url('https://raw.githubusercontent.com/Benedict0530/Astro-Strike-Armada/main/background.jpg') repeat-y;
   background-size: auto 20000%; /* Adjust size for seamless tiling */
   background-position: center top; /* Start from the top center */
   position: relative;
